@@ -352,7 +352,7 @@ describe('core-js-conditions-n-loops', () => {
         const balanced = utility.getBalancedArrayUtil(length * (i + 1));
         assert.equal(
           tasks.getBalanceIndex(balanced.arr),
-          balanced.balanceIndex
+          balanced.balanceIndex,
         );
       }
       assert.equal(

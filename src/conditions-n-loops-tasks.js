@@ -537,13 +537,59 @@ function shuffleChar(str, iterations) {
  * 123440   => 124034
  * 1203450  => 1203504
  * 90822    => 92028
- * 321321   => 322113
  *
+ * 321321   => 322113
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger(number) {
+  function findIndex(arr, x) {
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i] === x) return i;
+    }
+    return -1;
+  }
+
+  let copy = number;
+  let nextDigit = 0;
+
+  const divide = 10;
+  let previousDigit = copy % divide;
+  const store = [previousDigit];
+  while (copy / divide > 1) {
+    copy = Math.trunc(copy / divide);
+    nextDigit = copy % divide;
+    if (previousDigit > nextDigit) {
+      copy = Math.trunc(copy / divide);
+
+      store.push(nextDigit);
+      let multiple = 10 ** store.length;
+
+      store.sort((a, b) => a - b);
+      let index = findIndex(store, nextDigit);
+      let biggerDigit = 0;
+      while (nextDigit >= biggerDigit) {
+        biggerDigit = store[index + 1];
+        index += 1;
+      }
+      store.splice(findIndex(store, biggerDigit), 1);
+
+      copy *= multiple;
+      multiple /= 10;
+      copy += biggerDigit * multiple;
+      multiple /= 10;
+      let i = 0;
+      while (multiple > 1) {
+        copy += store[i] * multiple;
+        multiple /= 10;
+        i += 1;
+      }
+      return copy + store[i];
+    }
+    store.push(nextDigit);
+    previousDigit = nextDigit;
+  }
+  return number;
 }
 
 module.exports = {

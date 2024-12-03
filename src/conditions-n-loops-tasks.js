@@ -457,33 +457,30 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(arr) {
-  const quicksort = (original) => {
-    if (original.length <= 1) {
-      return original;
-    }
-
-    const middle = original[0];
-    const leftArr = [];
-    const rightArr = [];
-
-    for (let i = 1; i < original.length; i += 1) {
-      if (original[i] < middle) {
-        leftArr[leftArr.length] = original[i];
-      } else {
-        rightArr[rightArr.length] = original[i];
-      }
-    }
-
-    return [...quicksort(leftArr), middle, ...quicksort(rightArr)];
-  };
-
-  const sorted = quicksort(arr);
-  const result = arr;
-  for (let i = 0; i < result.length; i += 1) {
-    result[i] = sorted[i];
-  }
-  return result;
+function sortByAsc(/* arr */) {
+  throw new Error('Not implemented');
+  // const quicksort = (original) => {
+  //   if (original.length <= 1) {
+  //     return original;
+  //   }
+  //   const middle = original[0];
+  //   const leftArr = [];
+  //   const rightArr = [];
+  //   for (let i = 1; i < original.length; i += 1) {
+  //     if (original[i] < middle) {
+  //       leftArr[leftArr.length] = original[i];
+  //     } else {
+  //       rightArr[rightArr.length] = original[i];
+  //     }
+  //   }
+  //   return [...quicksort(leftArr), middle, ...quicksort(rightArr)];
+  // };
+  // const sorted = quicksort(arr);
+  // const result = arr;
+  // for (let i = 0; i < result.length; i += 1) {
+  //   result[i] = sorted[i];
+  // }
+  // return result;
 }
 
 /**

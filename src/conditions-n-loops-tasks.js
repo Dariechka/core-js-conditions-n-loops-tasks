@@ -533,7 +533,7 @@ function shuffleChar(str, iterations) {
  * 123440   => 124034
  * 1203450  => 1203504
  * 90822    => 92028
- *
+ 
  * 321321   => 322113
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.

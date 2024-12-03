@@ -506,17 +506,19 @@ function shuffleChar(str, iterations) {
     }
     return Math.floor(length / 2 + index / 2);
   };
-  const result = [...str];
+  let result = [...str];
   let intermediateResult = [...str];
   for (let i = 0; i < iterations; i += 1) {
     for (let j = 0; j < intermediateResult.length; j += 1) {
       result[getNewIndex(j, str.length)] = intermediateResult[j];
     }
-    intermediateResult = [...result];
+    const swap = result;
+    result = intermediateResult;
+    intermediateResult = swap;
   }
   let resultStr = '';
-  for (let i = 0; i < result.length; i += 1) {
-    resultStr += result[i];
+  for (let i = 0; i < intermediateResult.length; i += 1) {
+    resultStr += intermediateResult[i];
   }
   return resultStr;
 }

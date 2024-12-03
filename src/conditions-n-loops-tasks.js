@@ -500,13 +500,16 @@ function sortByAsc(arr) {
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
 function shuffleChar(str, iterations) {
+  const middleIndex = str.length / 2;
   const calcFinalIndex = (index) => {
     let newIndex = index;
     for (let i = 0; i < iterations; i += 1) {
-      newIndex =
-        newIndex % 2 === 0
-          ? newIndex / 2
-          : Math.floor(str.length / 2 + newIndex / 2);
+      const half = newIndex / 2;
+      if (Number.isInteger(half)) {
+        newIndex = half;
+      } else {
+        newIndex = Math.floor(half + middleIndex);
+      }
     }
     return newIndex;
   };

@@ -479,7 +479,6 @@ function sortByAsc(arr) {
   for (let i = 0; i < result.length; i += 1) {
     result[i] = sorted[i];
   }
-  return result;
 }
 
 /**
@@ -500,29 +499,39 @@ function sortByAsc(arr) {
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
 function shuffleChar(str, iterations) {
-  const middleIndex = str.length / 2;
-  const calcFinalIndex = (index) => {
-    let newIndex = index;
-    for (let i = 0; i < iterations; i += 1) {
-      const half = newIndex / 2;
-      if (Number.isInteger(half)) {
-        newIndex = half;
-      } else {
-        newIndex = Math.floor(half + middleIndex);
-      }
+  const getNewIndex = (index) => {
+    if (index % 2 === 0) {
+      return index / 2;
     }
-    return newIndex;
+    return Math.floor(str.length / 2 + index / 2);
   };
+  const toStr = (arr) => {
+    let resultStr = '';
+    for (let i = 0; i < arr.length; i += 1) {
+      resultStr += arr[i];
+    }
+    return resultStr;
+  };
+  const shuffle = (arr) => {
+    const result = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      result[getNewIndex(i)] = arr[i];
+    }
+    return toStr(result);
+  };
+  let count = 0;
+  let shuffled = str;
+  do {
+    count += 1;
+    shuffled = shuffle(shuffled);
+  } while (shuffled !== str);
 
-  const result = Array(str.length);
-  for (let i = 0; i < result.length; i += 1) {
-    result[calcFinalIndex(i)] = str[i];
+  const requiredIterations = iterations % count;
+  let result = str;
+  for (let i = 0; i < requiredIterations; i += 1) {
+    result = shuffle(result);
   }
-  let resultStr = '';
-  for (let i = 0; i < result.length; i += 1) {
-    resultStr += result[i];
-  }
-  return resultStr;
+  return result;
 }
 
 /**
